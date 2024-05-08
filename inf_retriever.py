@@ -12,13 +12,13 @@ class InfRetriever:
         userMovieIds = userPrefs['movieId'].values
 
         if sample_size > userPrefs.shape[0]:
-            sample_size = int(0.67* userPrefs.shape[0])
-
-        probs =  [1/userMovieIds.shape[0]] * userMovieIds.shape[0]
-        chosenMovieIds = np.random.choice(userMovieIds, size=sample_size, replace=False, p=probs)
-
-        self.chosenMovieIds = chosenMovieIds
-    
+            #sample_size = int(0.67* userPrefs.shape[0])
+            self.chosenMovieIds = userMovieIds
+        else:
+            probs =  [1/userMovieIds.shape[0]] * userMovieIds.shape[0]
+            chosenMovieIds = np.random.choice(userMovieIds, size=sample_size, replace=False, p=probs)
+            self.chosenMovieIds = chosenMovieIds    
+        
     def getMovieTitles(self):
         movies = pd.read_csv("./datasets/movies.csv")
         titles = list()
